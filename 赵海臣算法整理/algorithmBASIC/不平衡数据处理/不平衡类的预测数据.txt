@@ -1,0 +1,47 @@
+不平衡类的结果(训练集alive:dead = 1:2)：
+
+
+直接训练：
+>>> print("DecisionTreeErr Training Error   = " + str(DecisionTreeErr))
+DecisionTreeErr Training Error   = 0.159722886072
+>>> print("DecisionTreeErr Training Correct = " + str(1 - DecisionTreeErr))
+DecisionTreeErr Training Correct = 0.840277113928
+>>> Alive             = DecisionTreeResult.filter(DecisionTreeResult["label"] == 1)
+>>> TpRate            = float(Alive.filter(Alive["label"] == Alive["prediction"]).count()) / Alive.count()
+>>> print("True Positive(Alive) Rate        = " + str(TpRate))
+True Positive(Alive) Rate        = 0.683755976737
+>>> Dead              = DecisionTreeResult.filter(DecisionTreeResult["label"] == 0)
+>>> TnRate            = float(Dead.filter(Dead["label"] == Dead["prediction"]).count()) / Dead.count()
+>>> print("True Negative(Dead) Rate         = " + str(TnRate))
+True Negative(Dead) Rate         = 0.92330194955
+>>> Dead              = DecisionTreeResult.filter(DecisionTreeResult["label"] == 0)
+>>> FpRate            = float(Dead.filter(Dead["label"] != Dead["prediction"]).count()) / Dead.count()
+>>> print("False Positive(Alive) Rate       = " + str(FpRate))
+False Positive(Alive) Rate       = 0.07669805045
+>>> Alive             = DecisionTreeResult.filter(DecisionTreeResult["label"] == 1)
+>>> FnRate            = float(Alive.filter(Alive["label"] != Alive["prediction"]).count()) / Alive.count()
+>>> print("False Negative(Dead) Rate        = " + str(FnRate))
+False Negative(Dead) Rate        = 0.316244023263
+
+
+有放回重采样alive，使得训练集alive:dead = 1:1：
+>>> print("DecisionTreeErr Training Error   = " + str(DecisionTreeErr))
+DecisionTreeErr Training Error   = 0.173549488489
+>>> print("DecisionTreeErr Training Correct = " + str(1 - DecisionTreeErr))
+DecisionTreeErr Training Correct = 0.826450511511
+>>> Alive             = DecisionTreeResult.filter(DecisionTreeResult["label"] == 1)
+>>> TpRate            = float(Alive.filter(Alive["label"] == Alive["prediction"]).count()) / Alive.count()
+>>> print("True Positive(Alive) Rate        = " + str(TpRate))
+True Positive(Alive) Rate        = 0.770455394437
+>>> Dead              = DecisionTreeResult.filter(DecisionTreeResult["label"] == 0)
+>>> TnRate            = float(Dead.filter(Dead["label"] == Dead["prediction"]).count()) / Dead.count()
+>>> print("True Negative(Dead) Rate         = " + str(TnRate))
+True Negative(Dead) Rate         = 0.856152476844
+>>> Dead              = DecisionTreeResult.filter(DecisionTreeResult["label"] == 0)
+>>> FpRate            = float(Dead.filter(Dead["label"] != Dead["prediction"]).count()) / Dead.count()
+>>> print("False Positive(Alive) Rate       = " + str(FpRate))
+False Positive(Alive) Rate       = 0.143847523156
+>>> Alive             = DecisionTreeResult.filter(DecisionTreeResult["label"] == 1)
+>>> FnRate            = float(Alive.filter(Alive["label"] != Alive["prediction"]).count()) / Alive.count()
+>>> print("False Negative(Dead) Rate        = " + str(FnRate))
+False Negative(Dead) Rate        = 0.229544605563
